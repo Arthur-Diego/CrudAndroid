@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CrudSimplesAndroid</string>
+    <string name="nome">Nome:</string>
+    <string name="autorlbl">Autor:</string>
+
+    <string name="nomeText">Nome</string>
+    <string name="autorText">Autor</string>
+
+    <string name="salvar">Salvar</string>
+
+</resources>
