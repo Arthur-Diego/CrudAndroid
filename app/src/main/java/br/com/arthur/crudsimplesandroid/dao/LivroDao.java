@@ -3,14 +3,11 @@ package br.com.arthur.crudsimplesandroid.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.arthur.crudsimplesandroid.controller.FormLivroActivity;
 import br.com.arthur.crudsimplesandroid.model.Livro;
 
 /**
@@ -18,7 +15,7 @@ import br.com.arthur.crudsimplesandroid.model.Livro;
  * @author Arthur Diego
  */
 
-public class LivroDao extends SQLiteOpenHelper implements Serializable {
+public class LivroDao extends AbstractTemplateDao implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,16 +24,15 @@ public class LivroDao extends SQLiteOpenHelper implements Serializable {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    protected String getSQLCreate() {
         String sql = "CREATE TABLE Livro ( id INTEGER PRIMARY KEY, nome TEXT NOT NULL, autor TEXT NOT NULL)";
-        db.execSQL(sql);
+        return  sql;
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+    protected String getSQLUpdate() {
         String sql = "DROP TABLE IF EXISTS Livro";
-        db.execSQL(sql);
-        onCreate(db);
+        return sql;
     }
 
     /**
@@ -91,14 +87,5 @@ public class LivroDao extends SQLiteOpenHelper implements Serializable {
 
         return dados;
     }
-
-    public SQLiteDatabase getDataBaseW(){
-        return getWritableDatabase();
-    }
-
-    public SQLiteDatabase getDataBaseR(){
-        return getReadableDatabase();
-    }
-
 
 }

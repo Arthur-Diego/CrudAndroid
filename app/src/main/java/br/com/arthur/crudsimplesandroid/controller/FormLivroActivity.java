@@ -1,11 +1,14 @@
 package br.com.arthur.crudsimplesandroid.controller;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +35,8 @@ public class FormLivroActivity extends AppCompatActivity implements DeleteDelega
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_livro);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
        // Context context = getBaseContext();
 
         dao = new LivroDao(this);//Instancia de livroDao
@@ -46,6 +51,8 @@ public class FormLivroActivity extends AppCompatActivity implements DeleteDelega
         if(liv != null){
             helper.preencheLivro(liv);
         }
+
+
 
     }
 
@@ -63,7 +70,7 @@ public class FormLivroActivity extends AppCompatActivity implements DeleteDelega
 
                 Intent intent = new Intent(FormLivroActivity.this, ListLivroActivit.class);
 
-                intent.putExtra("this", FormLivroActivity.this);
+//                intent.putExtra("this", FormLivroActivity.this);
                 startActivity(intent);
 
             }
@@ -74,35 +81,16 @@ public class FormLivroActivity extends AppCompatActivity implements DeleteDelega
         return this;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
 
     @Override
     public void delete(Livro livro) {
         dao.delete(livro);
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-    }
-
-    @SuppressWarnings("unchecked")
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator()
-    {
-        @Override
-        public FormLivroActivity createFromParcel(Parcel in)
-        {
-            return new FormLivroActivity();
-        }
-
-        @Override
-        public Object[] newArray(int size)
-        {
-            return new FormLivroActivity[size];
-        }
-    };
 }

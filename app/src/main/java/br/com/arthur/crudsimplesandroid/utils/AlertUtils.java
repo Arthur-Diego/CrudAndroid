@@ -12,7 +12,7 @@ import android.graphics.drawable.Icon;
 
 public class AlertUtils {
 
-    public void messageDelete(Context context, Drawable icon, String title, String msg, DialogInterface.OnClickListener positiveBtn, DialogInterface.OnClickListener negativeBtn){
+    public void messageDelete(Context context, int icon, String title, String msg, DialogInterface.OnClickListener positiveBtn, DialogInterface.OnClickListener negativeBtn){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         builder.setIcon(icon);
@@ -21,6 +21,7 @@ public class AlertUtils {
 
         builder.setPositiveButton("Sim", positiveBtn);
         builder.setNegativeButton("Não", negativeBtn);
+        builder.show();
 
     }
 }

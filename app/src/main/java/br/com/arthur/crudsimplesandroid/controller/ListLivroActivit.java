@@ -27,6 +27,8 @@ public class ListLivroActivit extends AppCompatActivity implements Serializable 
 
     DeleteDelegate delegate;
 
+    ArrayAdapter<Livro> livrosAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +38,7 @@ public class ListLivroActivit extends AppCompatActivity implements Serializable 
         list = (ListView) findViewById(R.id.listLivro);
         clickItemList();
         clickSeguraParaExcluir();
-        ArrayAdapter<Livro> livrosAdapter = new ArrayAdapter<Livro>(this, android.R.layout.simple_list_item_1, livros);
+        livrosAdapter = new ArrayAdapter<Livro>(this, android.R.layout.simple_list_item_1, livros);
         Intent intent = getIntent();
         delegate = (DeleteDelegate) intent.getParcelableExtra("this");
         list.setAdapter(livrosAdapter);
@@ -60,7 +62,7 @@ public class ListLivroActivit extends AppCompatActivity implements Serializable 
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 AlertUtils aler = new AlertUtils();
-                aler.messageDelete(ListLivroActivit.this, null, "Excluir Livro", "Deseja esxlcuir esse livro?", clickSim(i), clickNao());
+                aler.messageDelete(ListLivroActivit.this, R.drawable.books, "Excluir Livro", "Deseja exlcuir esse livro?", clickSim(i), clickNao());
                 return true;
             }
         });
@@ -70,8 +72,12 @@ public class ListLivroActivit extends AppCompatActivity implements Serializable 
         return new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                list.removeViewAt(i);
-                delegate.delete((Livro)list.getItemAtPosition(positionItem));
+
+                Livro liv = (Livro)list.getItemAtPosition(positionItem);
+
+                livrosAdapter.remove(liv);
+                livrosAdapter.notifyDataSetChanged();
+                dao.delete(liv);
                 list.deferNotifyDataSetChanged();
             }
         };

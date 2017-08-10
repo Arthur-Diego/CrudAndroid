@@ -10,7 +10,7 @@ import br.com.arthur.crudsimplesandroid.model.Livro;
  * Created by arthur on 09/08/17.
  */
 
-interface DeleteDelegate extends Parcelable {
+interface DeleteDelegate {
 
     public void delete(Livro livro);
 
