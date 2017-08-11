@@ -15,12 +15,12 @@ import br.com.arthur.crudsimplesandroid.model.Livro;
  * @author Arthur Diego
  */
 
-public class LivroDao extends AbstractTemplateDao implements Serializable {
+public class LivroDao extends AbstractTemplateDao {
 
     private static final long serialVersionUID = 1L;
 
     public LivroDao(Context context) {
-        super(context, "Livro", null, 1);
+        super(context);
     }
 
     @Override

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="br.com.arthur.crudsimplesandroid.controller.FormLivroActivity">
 
-    <include layout="@layout/nav_header_template_teste"/>
+
     <include layout="@layout/include_toolbar"/>
     <TextView
         android:id="@+id/textView"

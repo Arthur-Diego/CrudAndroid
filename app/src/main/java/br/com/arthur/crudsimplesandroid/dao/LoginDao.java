@@ -16,7 +16,7 @@ import br.com.arthur.crudsimplesandroid.model.Login;
 public class LoginDao extends AbstractTemplateDao implements Serializable{
 
     public LoginDao(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, "Login", null, 1);
+        super(context);
     }
 
 //    @Override

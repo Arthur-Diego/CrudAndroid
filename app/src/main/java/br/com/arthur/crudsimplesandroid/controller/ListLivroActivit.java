@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ListView;
 
 import java.io.Serializable;
@@ -14,6 +16,7 @@ import java.util.List;
 
 import br.com.arthur.crudsimplesandroid.R;
 import br.com.arthur.crudsimplesandroid.dao.LivroDao;
+import br.com.arthur.crudsimplesandroid.helper.ListViewLivroAdapter;
 import br.com.arthur.crudsimplesandroid.model.Livro;
 import br.com.arthur.crudsimplesandroid.utils.AlertUtils;
 
@@ -38,9 +41,8 @@ public class ListLivroActivit extends AppCompatActivity implements Serializable 
         list = (ListView) findViewById(R.id.listLivro);
         clickItemList();
         clickSeguraParaExcluir();
-        livrosAdapter = new ArrayAdapter<Livro>(this, android.R.layout.simple_list_item_1, livros);
         Intent intent = getIntent();
-        delegate = (DeleteDelegate) intent.getParcelableExtra("this");
+        livrosAdapter = new ListViewLivroAdapter(this, livros, android.R.layout.simple_list_item_1);
         list.setAdapter(livrosAdapter);
     }
 
@@ -48,7 +50,11 @@ public class ListLivroActivit extends AppCompatActivity implements Serializable 
         list.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Livro livro = (Livro) list.getItemAtPosition(i);
+                //Planeta p = (Planeta) parent.getAdapter().getItem(idx);
+
+                Livro livro = (Livro) livrosAdapter.getItem(i);
+
+               // Livro livro = (Livro) list.getItemAtPosition(i);
                 Intent intentVaiPraForm = new Intent(ListLivroActivit.this, FormLivroActivity.class);
                 intentVaiPraForm.putExtra("livro",  livro);
                 startActivity(intentVaiPraForm);

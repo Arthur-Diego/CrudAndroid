@@ -36,7 +36,11 @@ public class FormLivroActivity extends AppCompatActivity implements DeleteDelega
         setContentView(R.layout.activity_form_livro);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+
         setSupportActionBar(toolbar);
+        
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);//Remover titulo da aplicação do tollbar
        // Context context = getBaseContext();
 
         dao = new LivroDao(this);//Instancia de livroDao
